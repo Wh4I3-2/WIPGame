@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c46vpta70m7gb"
+path="res://.godot/imported/attack of the space kazoo bandits.ogg-e9ff226913654d92e9857fcf79a99b91.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/attack of the space kazoo bandits.ogg"
+dest_files=["res://.godot/imported/attack of the space kazoo bandits.ogg-e9ff226913654d92e9857fcf79a99b91.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

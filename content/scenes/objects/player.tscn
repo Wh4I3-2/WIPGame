@@ -1,0 +1,304 @@
+[gd_scene load_steps=40 format=3 uid="uid://byrj4q5pr6tni"]
+
+[ext_resource type="Script" path="res://source/scripts/player.gd" id="1_ivxun"]
+[ext_resource type="PackedScene" uid="uid://do3300auj8tip" path="res://content/scenes/particles/player/jump.tscn" id="2_gqk7t"]
+[ext_resource type="PackedScene" uid="uid://bps2ibtuhxcuf" path="res://content/scenes/particles/player/land.tscn" id="3_1ngv5"]
+[ext_resource type="PackedScene" uid="uid://c01yknlnjgn0p" path="res://content/scenes/particles/player/wall_jump_left.tscn" id="4_a3gdu"]
+[ext_resource type="PackedScene" uid="uid://bx1mbludkheuc" path="res://content/scenes/particles/player/wall_jump_right.tscn" id="5_4vmsh"]
+[ext_resource type="Script" path="res://source/scripts/graphics/pulsate_light.gd" id="5_33djo"]
+[ext_resource type="PackedScene" uid="uid://dwg7iwycl4pmb" path="res://content/scenes/particles/player/climb_jump_left.tscn" id="6_187bd"]
+[ext_resource type="PackedScene" uid="uid://c83kiui2g85bq" path="res://content/scenes/particles/player/climb_jump_right.tscn" id="7_33apc"]
+[ext_resource type="Script" path="res://source/scripts/follow_able.gd" id="7_u7tl2"]
+[ext_resource type="AudioStream" uid="uid://b207i7jpd8nu6" path="res://assets/audio/sfx/land.ogg" id="8_m74ha"]
+[ext_resource type="AudioStream" uid="uid://clg07bxqxyca0" path="res://assets/audio/sfx/jump.ogg" id="8_nfmtr"]
+[ext_resource type="AudioStream" uid="uid://bnnbh8keckgfb" path="res://assets/audio/sfx/death.ogg" id="8_vq64m"]
+[ext_resource type="AudioStream" uid="uid://bwckr53a3ipab" path="res://assets/audio/sfx/step.ogg" id="11_bgbst"]
+[ext_resource type="Texture2D" uid="uid://c0obenjvs2kxv" path="res://assets/textures/hats/monkeyman.png" id="12_i6lvl"]
+
+[sub_resource type="Gradient" id="Gradient_elhhi"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0j1r4"]
+gradient = SubResource("Gradient_elhhi")
+width = 10
+height = 15
+
+[sub_resource type="Gradient" id="Gradient_dka6g"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i4syl"]
+gradient = SubResource("Gradient_dka6g")
+width = 1
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_4ab1e"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnq4x"]
+gradient = SubResource("Gradient_4ab1e")
+width = 6
+height = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5kld"]
+custom_solver_bias = 0.08
+size = Vector2(10, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sachw"]
+size = Vector2(10, 15)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xf850"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_fwxqo"]
+offsets = PackedFloat32Array(0, 0.994012)
+colors = PackedColorArray(1, 1, 1, 1, 0.7276, 0.714, 0.85, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_65xpf"]
+gradient = SubResource("Gradient_fwxqo")
+
+[sub_resource type="Gradient" id="Gradient_235b7"]
+offsets = PackedFloat32Array(0, 0.375439, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h66ca"]
+gradient = SubResource("Gradient_235b7")
+
+[sub_resource type="Curve" id="Curve_6m4am"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.821086, 0.98344), 0.50335, 0.0, 0, 0, Vector2(1, 0.635669), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_7tp3r"]
+curve_y = SubResource("Curve_6m4am")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u4blu"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, 1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+directional_velocity_min = 10.0
+directional_velocity_max = 100.0
+directional_velocity_curve = SubResource("CurveXYZTexture_7tp3r")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 2.0
+color = Color(0.768627, 0.768627, 0.768627, 1)
+color_ramp = SubResource("GradientTexture1D_h66ca")
+color_initial_ramp = SubResource("GradientTexture1D_65xpf")
+anim_offset_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_h43wf"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_agks8"]
+gradient = SubResource("Gradient_h43wf")
+width = 1
+height = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mr2kw"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_dvr5y"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njiwn"]
+gradient = SubResource("Gradient_dvr5y")
+width = 1
+height = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s6y8"]
+size = Vector2(1, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6014v"]
+size = Vector2(10, 1)
+
+[sub_resource type="Gradient" id="Gradient_ohggy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.314208, 0.581967)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.517647, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nirp1"]
+gradient = SubResource("Gradient_ohggy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(0, -9)
+collision_layer = 13
+collision_mask = 13
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_ivxun")
+jump_praticles = ExtResource("2_gqk7t")
+land_praticles = ExtResource("3_1ngv5")
+wall_jump_left_particles = ExtResource("4_a3gdu")
+wall_jump_right_particles = ExtResource("5_4vmsh")
+climb_jump_left_particles = ExtResource("6_187bd")
+climb_jump_right_particles = ExtResource("7_33apc")
+jump_sound = ExtResource("8_nfmtr")
+land_sound = ExtResource("8_m74ha")
+death_sound = ExtResource("8_vq64m")
+step_sound = ExtResource("11_bgbst")
+step_delay = 0.3
+
+[node name="SpritePivot" type="Node2D" parent="."]
+position = Vector2(6.98492e-10, 7)
+rotation = 0.00287912
+
+[node name="Flipper" type="Node2D" parent="SpritePivot"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpritePivot/Flipper"]
+position = Vector2(4.65661e-10, -8)
+texture = SubResource("GradientTexture2D_0j1r4")
+offset = Vector2(0, 1)
+
+[node name="Face" type="Node2D" parent="SpritePivot/Flipper"]
+position = Vector2(-1.39698e-09, -12)
+
+[node name="Eye 1" type="Sprite2D" parent="SpritePivot/Flipper/Face"]
+z_index = 5
+position = Vector2(-0.0345488, 4.98295e-05)
+texture = SubResource("GradientTexture2D_i4syl")
+offset = Vector2(6, -1)
+
+[node name="Eye 2" type="Sprite2D" parent="SpritePivot/Flipper/Face"]
+z_index = 5
+position = Vector2(-0.0345488, 4.94793e-05)
+texture = SubResource("GradientTexture2D_i4syl")
+offset = Vector2(-5, -1)
+
+[node name="Mouth" type="Sprite2D" parent="SpritePivot/Flipper/Face"]
+z_index = 5
+position = Vector2(-1.19209e-07, -2.70084e-08)
+texture = SubResource("GradientTexture2D_bnq4x")
+offset = Vector2(1, 0)
+
+[node name="Hat" type="Sprite2D" parent="SpritePivot/Flipper"]
+z_index = 10
+position = Vector2(0, -19)
+texture = ExtResource("12_i6lvl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_v5kld")
+
+[node name="DamageHitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_sachw")
+debug_color = Color(0.980392, 0, 0.392157, 0.419608)
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="SlideParticlesLeft" type="GPUParticles2D" parent="Particles"]
+z_index = 4
+material = SubResource("CanvasItemMaterial_xf850")
+position = Vector2(-6, 9)
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_u4blu")
+texture = SubResource("GradientTexture2D_agks8")
+
+[node name="SlideParticlesRight" type="GPUParticles2D" parent="Particles"]
+z_index = 4
+material = SubResource("CanvasItemMaterial_mr2kw")
+position = Vector2(6, 9)
+scale = Vector2(-1, 1)
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_u4blu")
+texture = SubResource("GradientTexture2D_njiwn")
+
+[node name="WallJumpLeft" type="Node2D" parent="Particles"]
+position = Vector2(-6, 9)
+
+[node name="WallJumpRight" type="Node2D" parent="Particles"]
+position = Vector2(6, 9)
+
+[node name="Jump" type="Node2D" parent="Particles"]
+position = Vector2(0, 9)
+
+[node name="Land" type="Node2D" parent="Particles"]
+position = Vector2(0, 9)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DashCooldownTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="WallJumpDisableInputTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="StepTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="ClimbStepTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="SlideSoundTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="RightWallJumpCheck" type="ShapeCast2D" parent="."]
+position = Vector2(4, 1)
+shape = SubResource("RectangleShape2D_8s6y8")
+target_position = Vector2(2, 0)
+max_results = 1
+
+[node name="LeftWallJumpCheck" type="ShapeCast2D" parent="."]
+position = Vector2(-5, 1)
+shape = SubResource("RectangleShape2D_8s6y8")
+target_position = Vector2(-2, 0)
+max_results = 1
+
+[node name="FollowNode" type="Node2D" parent="."]
+script = ExtResource("7_u7tl2")
+follow_group = "bits"
+
+[node name="CameraActivator" type="Area2D" parent="."]
+process_mode = 1
+collision_layer = 16
+collision_mask = 16
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraActivator"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_6014v")
+debug_color = Color(0.537255, 0.407843, 1, 0.419608)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.85098, 1, 1, 0.356863)
+energy = 1.2
+texture = SubResource("GradientTexture2D_nirp1")
+texture_scale = 0.9
+script = ExtResource("5_33djo")
+_scale = 0.25
+offset_scale = 0.9
+first_duration = 4.0
+first_transition = 1
+first_hold = 0.5
+second_duration = 4.0
+second_transition = 1
+second_hold = 0.5

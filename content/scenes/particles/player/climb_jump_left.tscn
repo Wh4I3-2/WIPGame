@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwg7iwycl4pmb"]
+
+[ext_resource type="Script" path="res://source/scripts/particle_destroy_on_finish.gd" id="2_y6oks"]
+
+[sub_resource type="Gradient" id="Gradient_fwxqo"]
+offsets = PackedFloat32Array(0, 0.994012)
+colors = PackedColorArray(1, 1, 1, 1, 0.7276, 0.714, 0.85, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wjqnw"]
+gradient = SubResource("Gradient_fwxqo")
+
+[sub_resource type="Gradient" id="Gradient_s67r7"]
+offsets = PackedFloat32Array(0, 0.326316, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_60mks"]
+gradient = SubResource("Gradient_s67r7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_edmna"]
+particle_flag_disable_z = true
+direction = Vector3(-0.1, -1, 0)
+spread = 9.44
+initial_velocity_min = 109.24
+initial_velocity_max = 152.0
+gravity = Vector3(0, 600, 0)
+scale_min = 0.0
+scale_max = 2.0
+color = Color(0.768627, 0.768627, 0.768627, 1)
+color_ramp = SubResource("GradientTexture1D_60mks")
+color_initial_ramp = SubResource("GradientTexture1D_wjqnw")
+anim_offset_max = 1.0
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_jx7o0"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5qrb4"]
+gradient = SubResource("Gradient_jx7o0")
+width = 1
+height = 1
+
+[node name="ClimbJumpLeft" type="GPUParticles2D"]
+z_index = 2
+scale = Vector2(-1, 1)
+emitting = false
+amount = 48
+process_material = SubResource("ParticleProcessMaterial_edmna")
+texture = SubResource("GradientTexture2D_5qrb4")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_y6oks")

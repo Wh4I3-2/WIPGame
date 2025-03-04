@@ -1,0 +1,770 @@
+[gd_scene load_steps=39 format=3 uid="uid://cjm64tnbpj4ow"]
+
+[ext_resource type="Script" path="res://source/scripts/ui/set_current_ui.gd" id="1_gvg1w"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/scene_change_button.gd" id="1_mdgax"]
+[ext_resource type="FontFile" uid="uid://co5lovalni0l" path="res://assets/fonts/roboto/Roboto-Black.ttf" id="1_ow5xp"]
+[ext_resource type="Script" path="res://source/scripts/set_main_menu.gd" id="1_yljtn"]
+[ext_resource type="Shader" path="res://assets/shaders/space.gdshader" id="2_gfkcr"]
+[ext_resource type="Texture2D" uid="uid://ci07yi52txe64" path="res://noise.tres" id="3_1u87d"]
+[ext_resource type="Script" path="res://source/scripts/music_player.gd" id="3_e6nx3"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/ui_button.gd" id="3_qu54g"]
+[ext_resource type="Script" path="res://source/scripts/ui/noise_overlay.gd" id="4_ta3bf"]
+[ext_resource type="Shader" path="res://assets/shaders/overlay.gdshader" id="5_4kegj"]
+[ext_resource type="Theme" uid="uid://b0d136mxoiapm" path="res://assets/ui themes/main_theme.tres" id="5_xnn3q"]
+[ext_resource type="AudioStream" uid="uid://cd7xjkslc4j2" path="res://assets/audio/music/a depriving endless void of solitude.mp3" id="6_c21pu"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/exit_button.gd" id="6_iog6v"]
+[ext_resource type="Texture2D" uid="uid://mg3yb36lmnr7" path="res://assets/textures/overlay.png" id="6_xms50"]
+[ext_resource type="PackedScene" uid="uid://bgcvllmpl7f1n" path="res://content/scenes/ui/options.tscn" id="8_iyj0i"]
+[ext_resource type="Script" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="10_seqti"]
+[ext_resource type="PackedScene" uid="uid://b7ma5p6te22uc" path="res://content/scenes/ui/keyboard_controls.tscn" id="10_vfjky"]
+[ext_resource type="PackedScene" uid="uid://dsdq12b0k2865" path="res://content/scenes/levels/chapter 1/level_1.tscn" id="11_mxyoo"]
+[ext_resource type="PackedScene" uid="uid://cq313rv6jwqsr" path="res://content/scenes/ui/input_overlay.tscn" id="12_m8p7x"]
+[ext_resource type="PackedScene" uid="uid://by40fwq7rheb0" path="res://content/scenes/ui/cosmetics.tscn" id="18_pq1nr"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6xrf6"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_kyttf"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c0ohe"]
+gradient = SubResource("Gradient_kyttf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ditd1"]
+shader = ExtResource("2_gfkcr")
+shader_parameter/speed_scale = 0.4
+shader_parameter/texture = SubResource("GradientTexture2D_c0ohe")
+shader_parameter/noise = ExtResource("3_1u87d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1p5x2"]
+shader = ExtResource("5_4kegj")
+shader_parameter/scale = Vector2(2, 2)
+shader_parameter/scroll = Vector2(-0.02, -0.02)
+shader_parameter/modulate = Color(1, 1, 1, 0.0862745)
+shader_parameter/alpha = 0.09
+shader_parameter/alpha_speed = 0.6
+shader_parameter/alpha_offset = 0.01
+shader_parameter/_texture = ExtResource("6_xms50")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ws5or"]
+font = ExtResource("1_ow5xp")
+font_size = 108
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdcvh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rbus"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nev0c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2v4n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_46jdt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jg4l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rce5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itck0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4h3bc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwcli"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_shths"]
+
+[sub_resource type="Environment" id="Environment_dri4f"]
+background_mode = 3
+tonemap_exposure = 0.68
+glow_enabled = true
+glow_levels/2 = 3.38
+glow_intensity = 0.88
+glow_strength = 0.92
+glow_bloom = 0.22
+glow_hdr_threshold = 0.71
+glow_hdr_scale = 0.62
+adjustment_enabled = true
+adjustment_brightness = 1.24
+adjustment_contrast = 1.04
+
+[node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("focus")]
+layer = 99
+script = ExtResource("1_yljtn")
+main_menu = true
+focus = NodePath("SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Play/Play")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_6xrf6")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(320, 180)
+size_2d_override = Vector2i(320, 180)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="TextureRect2" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_ditd1")
+offset_left = -3305.0
+offset_top = -2308.0
+offset_right = 5774.0
+offset_bottom = 3196.0
+mouse_filter = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
+process_mode = 3
+script = ExtResource("4_ta3bf")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/CanvasLayer"]
+material = SubResource("ShaderMaterial_1p5x2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" groups=["ui_viewport"]]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1920, 1080)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Main" type="Control" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("focus") groups=["ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gvg1w")
+focus = NodePath("Margin/VBoxContainer/Play/Play")
+
+[node name="Margin" type="MarginContainer" parent="SubViewportContainer/SubViewport/Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_xnn3q")
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/Main/Margin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("5_xnn3q")
+text = "Wh4I3's Incredible Platformer"
+label_settings = SubResource("LabelSettings_ws5or")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/Main/Margin"]
+layout_mode = 2
+alignment = 2
+
+[node name="Play" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Play"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tdcvh")
+
+[node name="Play" type="Button" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Play" node_paths=PackedStringArray("seperator")]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../../Exit/Exit")
+focus_neighbor_bottom = NodePath("../../Options/Options")
+focus_next = NodePath("../../Options/Options")
+focus_previous = NodePath("../../Exit/Exit")
+theme = ExtResource("5_xnn3q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8rbus")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nev0c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u2v4n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_46jdt")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2jg4l")
+text = "Play"
+flat = true
+icon_alignment = 1
+script = ExtResource("1_mdgax")
+scene = ExtResource("11_mxyoo")
+transition_on = 0
+transition_on_length = 0.2
+transition_off = 0
+transition_off_length = 0.2
+seperator = NodePath("../VSeparator")
+
+[node name="Options" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tdcvh")
+
+[node name="Options" type="Button" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Options" node_paths=PackedStringArray("ui", "seperator")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Play/Play")
+focus_neighbor_bottom = NodePath("../../Cosmetics/Cosmetics")
+focus_next = NodePath("../../Cosmetics/Cosmetics")
+focus_previous = NodePath("../../Play/Play")
+theme = ExtResource("5_xnn3q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6rce5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_itck0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4h3bc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gwcli")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_shths")
+text = "Options"
+flat = true
+icon_alignment = 1
+script = ExtResource("3_qu54g")
+ui = NodePath("../../../../../Options")
+seperator = NodePath("../VSeparator")
+
+[node name="Cosmetics" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Cosmetics"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tdcvh")
+
+[node name="Cosmetics" type="Button" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Cosmetics" node_paths=PackedStringArray("ui", "seperator")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Options/Options")
+focus_neighbor_bottom = NodePath("../../Exit/Exit")
+focus_next = NodePath("../../Exit/Exit")
+focus_previous = NodePath("../../Options/Options")
+theme = ExtResource("5_xnn3q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6rce5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_itck0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4h3bc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gwcli")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_shths")
+text = "Cosmetics"
+flat = true
+icon_alignment = 1
+script = ExtResource("3_qu54g")
+ui = NodePath("../../../../../Cosmetics")
+seperator = NodePath("../VSeparator")
+
+[node name="Exit" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Exit"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tdcvh")
+
+[node name="Exit" type="Button" parent="SubViewportContainer/SubViewport/Main/Margin/VBoxContainer/Exit" node_paths=PackedStringArray("seperator")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Cosmetics/Cosmetics")
+focus_neighbor_bottom = NodePath("../../Play/Play")
+focus_next = NodePath("../../Play/Play")
+focus_previous = NodePath("../../Cosmetics/Cosmetics")
+theme = ExtResource("5_xnn3q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6rce5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_itck0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4h3bc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gwcli")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_shths")
+text = "Exit"
+flat = true
+icon_alignment = 1
+script = ExtResource("6_iog6v")
+seperator = NodePath("../VSeparator")
+
+[node name="Options" type="Control" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("focus") groups=["ui"]]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gvg1w")
+focus = NodePath("SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Back2/Back")
+
+[node name="SmoothScrollContainer" type="ScrollContainer" parent="SubViewportContainer/SubViewport/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+script = ExtResource("10_seqti")
+follow_focus_margin = 50
+allow_horizontal_scroll = false
+hide_scrollbar_over_time = true
+scrollbar_hide_time = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer"]
+layout_mode = 2
+
+[node name="Options" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer" instance=ExtResource("8_iyj0i")]
+layout_mode = 2
+theme_override_constants/margin_right = -1412
+
+[node name="Title" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Back2" index="0"]
+mouse_filter = 1
+
+[node name="Back" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Back2" index="1" node_paths=PackedStringArray("ui", "seperator")]
+mouse_filter = 1
+ui = NodePath("../../../../../../../Main")
+seperator = NodePath("../VSeparator")
+
+[node name="Controls" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="2"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Keyboard" index="1" node_paths=PackedStringArray("ui", "seperator")]
+mouse_filter = 1
+ui = NodePath("../../../../../../../KeyboardControls")
+seperator = NodePath("../VSeparator")
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="4"]
+mouse_filter = 1
+
+[node name="Video" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="5"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/HBoxContainer/HBoxContainer2" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/HBoxContainer/HBoxContainer2" index="1" node_paths=PackedStringArray("checkbox", "seperator")]
+mouse_filter = 1
+checkbox = NodePath("../../HBoxContainer/CheckBox")
+seperator = NodePath("../VSeparator")
+
+[node name="CheckBox" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/HBoxContainer/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/DisableNoise/HBoxContainer2" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/DisableNoise/HBoxContainer2" index="1" node_paths=PackedStringArray("checkbox", "seperator")]
+mouse_filter = 1
+checkbox = NodePath("../../HBoxContainer/CheckBox")
+seperator = NodePath("../VSeparator")
+
+[node name="CheckBox" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/DisableNoise/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/DisableShadows/HBoxContainer2" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/DisableShadows/HBoxContainer2" index="1" node_paths=PackedStringArray("checkbox", "seperator")]
+mouse_filter = 1
+checkbox = NodePath("../../HBoxContainer/CheckBox")
+seperator = NodePath("../VSeparator")
+
+[node name="CheckBox" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/DisableShadows/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator3" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="9"]
+mouse_filter = 1
+
+[node name="Audio" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="10"]
+mouse_filter = 1
+
+[node name="Video3" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Master" index="0"]
+mouse_filter = 1
+
+[node name="Video4" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Master/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="Master Slider" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="12"]
+mouse_filter = 1
+
+[node name="HSlider" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Master Slider" index="0"]
+mouse_filter = 1
+
+[node name="Video3" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Music2" index="0"]
+mouse_filter = 1
+
+[node name="Video4" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Music2/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="MusicSlider2" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="14"]
+mouse_filter = 1
+
+[node name="HSlider" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/MusicSlider2" index="0"]
+mouse_filter = 1
+
+[node name="Video3" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/SFX" index="0"]
+mouse_filter = 1
+
+[node name="Video4" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/SFX/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="SFXSlider" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="16"]
+mouse_filter = 1
+
+[node name="HSlider" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/SFXSlider" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator4" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="17"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Disable Music Glitches/HBoxContainer2" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Disable Music Glitches/HBoxContainer2" index="1" node_paths=PackedStringArray("checkbox", "seperator")]
+mouse_filter = 1
+checkbox = NodePath("../../HBoxContainer/CheckBox")
+seperator = NodePath("../VSeparator")
+
+[node name="CheckBox" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Disable Music Glitches/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator2" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="19"]
+mouse_filter = 1
+
+[node name="Extras" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer" index="20"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Developer Mode/HBoxContainer2" index="0"]
+mouse_filter = 1
+
+[node name="Developer Mode" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Developer Mode/HBoxContainer2" index="1"]
+mouse_filter = 1
+
+[node name="CheckBox" parent="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options/VBoxContainer/Developer Mode/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="KeyboardControls" type="Control" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("focus") groups=["ui"]]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gvg1w")
+focus = NodePath("ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Back2/Back")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SubViewportContainer/SubViewport/KeyboardControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+script = ExtResource("10_seqti")
+follow_focus_margin = 50
+hide_scrollbar_over_time = true
+scrollbar_hide_time = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer"]
+layout_mode = 2
+
+[node name="KeyboardControls" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer" instance=ExtResource("10_vfjky")]
+layout_mode = 2
+theme_override_constants/margin_right = -1412
+
+[node name="Title" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="Back" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Back2" index="0" node_paths=PackedStringArray("ui")]
+focus_neighbor_bottom = NodePath("../../Up/Keyboard/Button")
+focus_next = NodePath("../../Up/Keyboard/Button")
+mouse_filter = 1
+ui = NodePath("../../../../../../../Options")
+
+[node name="Movement" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="2"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Up/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Up/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Up" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Up/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Down/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Down/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Down" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Down/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Left/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Left/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Left" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Left/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Right/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Right/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Right" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Right/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator2" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="7"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Jump/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Jump/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Jump" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Jump/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Climb/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Climb/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Climb" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Climb/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="10"]
+mouse_filter = 1
+
+[node name="Window" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="11"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Fullscreen/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Fullscreen/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Fullscreen" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Fullscreen/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Pause/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Pause/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Pause" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Pause/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator4" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="14"]
+mouse_filter = 1
+
+[node name="Window2" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="15"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Screenshot/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Screenshot/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="HBoxContainer" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Screenshot" index="1" node_paths=PackedStringArray("input_overlay")]
+input_overlay = NodePath("../../../../../../../InputOverlay")
+
+[node name="InputPrompt" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Screenshot/HBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="HSeparator3" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer" index="17"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Reset/Keyboard" index="0"]
+mouse_filter = 1
+
+[node name="Button" parent="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls/VBoxContainer/Reset/Keyboard" index="1"]
+mouse_filter = 1
+
+[node name="InputOverlay" parent="SubViewportContainer/SubViewport" instance=ExtResource("12_m8p7x")]
+mouse_filter = 1
+
+[node name="Cosmetics" type="Control" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("focus") groups=["ui"]]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gvg1w")
+focus = NodePath("SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/Back2/Back")
+
+[node name="SmoothScrollContainer" type="ScrollContainer" parent="SubViewportContainer/SubViewport/Cosmetics"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+script = ExtResource("10_seqti")
+follow_focus_margin = 50
+allow_horizontal_scroll = false
+hide_scrollbar_over_time = true
+scrollbar_hide_time = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cosmetics" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer" instance=ExtResource("18_pq1nr")]
+layout_mode = 2
+
+[node name="Title" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="0"]
+mouse_filter = 1
+
+[node name="VSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/Back2" index="0"]
+mouse_filter = 1
+
+[node name="Back" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/Back2" index="1" node_paths=PackedStringArray("ui")]
+mouse_filter = 1
+ui = NodePath("../../../../../../../Main")
+
+[node name="Hats" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="2"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/NoHat" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/NoHat" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/StrawHat" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/StrawHat" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Dapper" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Dapper" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Chef" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Chef" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/ginger" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/ginger" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/witch" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/witch" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/dipper" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/dipper" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/NotChrimsas" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/NotChrimsas" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/NotAsDapper" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/NotAsDapper" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Tall" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Tall" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Bald" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/Bald" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/BigParsley" index="0"]
+mouse_filter = 1
+
+[node name="CosmeticButton" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer/GridContainer/BigParsley" index="1"]
+mouse_filter = 1
+
+[node name="HSeparator" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="4"]
+mouse_filter = 1
+
+[node name="Color" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="5"]
+mouse_filter = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+script = ExtResource("3_e6nx3")
+loop = ExtResource("6_c21pu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dri4f")
+
+[editable path="SubViewportContainer/SubViewport/Options/SmoothScrollContainer/CenterContainer/Options"]
+[editable path="SubViewportContainer/SubViewport/KeyboardControls/ScrollContainer/CenterContainer/KeyboardControls"]
+[editable path="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics"]

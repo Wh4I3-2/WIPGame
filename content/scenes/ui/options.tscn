@@ -1,0 +1,478 @@
+[gd_scene load_steps=19 format=3 uid="uid://bgcvllmpl7f1n"]
+
+[ext_resource type="Theme" uid="uid://b0d136mxoiapm" path="res://assets/ui themes/main_theme.tres" id="1_tbi8f"]
+[ext_resource type="FontFile" uid="uid://co5lovalni0l" path="res://assets/fonts/roboto/Roboto-Black.ttf" id="2_d5qwj"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/ui_button.gd" id="3_ptoo4"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/bool_settings_button.gd" id="5_m7v1q"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/audio_slider.gd" id="5_vek5e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ecdr6"]
+font = ExtResource("2_d5qwj")
+font_size = 96
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dxjpv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4d7c2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6fkl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vaph"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jicu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ee3u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gda2p"]
+font = ExtResource("2_d5qwj")
+font_size = 48
+font_color = Color(0.584314, 0.623529, 0.721569, 1)
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xfrfo"]
+font = ExtResource("2_d5qwj")
+font_size = 48
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xd17l"]
+font = ExtResource("2_d5qwj")
+font_size = 48
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgwfh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1c41n"]
+font = ExtResource("2_d5qwj")
+font_size = 48
+font_color = Color(0.964706, 0.964706, 0.964706, 1)
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vkjj7"]
+font = ExtResource("2_d5qwj")
+font_size = 48
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Options" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_tbi8f")
+theme_override_constants/margin_left = 512
+theme_override_constants/margin_right = 512
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Options"
+label_settings = SubResource("LabelSettings_ecdr6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Back2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Back" type="Button" parent="VBoxContainer/Back2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Developer Mode/HBoxContainer2/Developer Mode")
+focus_previous = NodePath("../../Developer Mode/HBoxContainer2/Developer Mode")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Back"
+flat = true
+icon_alignment = 1
+script = ExtResource("3_ptoo4")
+align = 1
+
+[node name="Controls" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_gda2p")
+vertical_alignment = 1
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Keyboard"]
+layout_mode = 2
+focus_next = NodePath("../../HBoxContainer/HBoxContainer2/Button")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Keyboard Controls"
+flat = true
+icon_alignment = 1
+script = ExtResource("3_ptoo4")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_constants/separation = 32
+
+[node name="Video" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Video"
+label_settings = SubResource("LabelSettings_gda2p")
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_next = NodePath("../../../DisableNoise/HBoxContainer2/Button")
+focus_previous = NodePath("../../../Keyboard/Button")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Fullscreen"
+flat = true
+icon_alignment = 1
+script = ExtResource("5_m7v1q")
+setting = "video/fullscreen"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_tbi8f")
+
+[node name="DisableNoise" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/DisableNoise"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/DisableNoise/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/DisableNoise/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_previous = NodePath("../../../HBoxContainer/HBoxContainer2/Button")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Disable Noise"
+flat = true
+icon_alignment = 1
+script = ExtResource("5_m7v1q")
+setting = "video/disable_noise"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DisableNoise"]
+layout_mode = 2
+alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/DisableNoise/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_tbi8f")
+
+[node name="DisableShadows" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/DisableShadows"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/DisableShadows/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/DisableShadows/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_previous = NodePath("../../../HBoxContainer/HBoxContainer2/Button")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Disable Shadows"
+flat = true
+icon_alignment = 1
+script = ExtResource("5_m7v1q")
+setting = "video/disable_shadows"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DisableShadows"]
+layout_mode = 2
+alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/DisableShadows/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_tbi8f")
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_constants/separation = 32
+
+[node name="Audio" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Audio"
+label_settings = SubResource("LabelSettings_gda2p")
+vertical_alignment = 1
+
+[node name="Master" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="Video3" type="Label" parent="VBoxContainer/Master"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_xfrfo")
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Master"]
+layout_mode = 2
+alignment = 2
+
+[node name="Video4" type="Label" parent="VBoxContainer/Master/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "100"
+label_settings = SubResource("LabelSettings_xd17l")
+vertical_alignment = 1
+
+[node name="Master Slider" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cgwfh")
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/Master Slider" node_paths=PackedStringArray("value_label")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("5_vek5e")
+bus_name = "Master"
+value_label = NodePath("../../Master/HBoxContainer/Video4")
+setting = "audio/master_volume"
+
+[node name="Music2" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="Video3" type="Label" parent="VBoxContainer/Music2"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Music Volume"
+label_settings = SubResource("LabelSettings_xfrfo")
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Music2"]
+layout_mode = 2
+alignment = 2
+
+[node name="Video4" type="Label" parent="VBoxContainer/Music2/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "100"
+label_settings = SubResource("LabelSettings_xd17l")
+vertical_alignment = 1
+
+[node name="MusicSlider2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cgwfh")
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MusicSlider2" node_paths=PackedStringArray("value_label")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("5_vek5e")
+bus_name = "Music"
+value_label = NodePath("../../Music2/HBoxContainer/Video4")
+setting = "audio/music_volume"
+
+[node name="SFX" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="Video3" type="Label" parent="VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "SFX Volume"
+label_settings = SubResource("LabelSettings_1c41n")
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/SFX"]
+layout_mode = 2
+alignment = 2
+
+[node name="Video4" type="Label" parent="VBoxContainer/SFX/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "100"
+label_settings = SubResource("LabelSettings_vkjj7")
+vertical_alignment = 1
+
+[node name="SFXSlider" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cgwfh")
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/SFXSlider" node_paths=PackedStringArray("value_label")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("5_vek5e")
+bus_name = "SFX"
+value_label = NodePath("../../SFX/HBoxContainer/Video4")
+setting = "audio/sfx_volume"
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_constants/separation = 20
+
+[node name="Disable Music Glitches" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Disable Music Glitches"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Disable Music Glitches/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Disable Music Glitches/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_previous = NodePath("../../../HBoxContainer/HBoxContainer2/Button")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Disable Music Glitches"
+flat = true
+icon_alignment = 1
+script = ExtResource("5_m7v1q")
+setting = "audio/disable_music_glitches"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Disable Music Glitches"]
+layout_mode = 2
+alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Disable Music Glitches/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_tbi8f")
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+theme_override_constants/separation = 20
+
+[node name="Extras" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Extras"
+label_settings = SubResource("LabelSettings_gda2p")
+vertical_alignment = 1
+
+[node name="Developer Mode" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_tbi8f")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Developer Mode"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Developer Mode/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Developer Mode" type="Button" parent="VBoxContainer/Developer Mode/HBoxContainer2" node_paths=PackedStringArray("checkbox", "seperator")]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../../../Back2/Back")
+focus_next = NodePath("../../../Back2/Back")
+theme = ExtResource("1_tbi8f")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+text = "Enable Developer Mode"
+flat = true
+icon_alignment = 1
+script = ExtResource("5_m7v1q")
+checkbox = NodePath("../../HBoxContainer/CheckBox")
+setting = "extras/developer_mode"
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Developer Mode"]
+layout_mode = 2
+alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Developer Mode/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_tbi8f")

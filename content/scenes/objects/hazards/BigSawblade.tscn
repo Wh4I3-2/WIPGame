@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0aikqmcy430h"]
+
+[ext_resource type="Texture2D" uid="uid://bsolid8qwer0e" path="res://assets/textures/hazards/big_sawblade_teeth.png" id="1_e3vn2"]
+[ext_resource type="Script" path="res://assets/textures/spinner.gd" id="2_ohpo4"]
+[ext_resource type="Texture2D" uid="uid://h0jcvrbpet5q" path="res://assets/textures/hazards/big_sawblade.png" id="3_xrbts"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sxej"]
+radius = 19.0263
+
+[node name="Sawblade" type="Area2D"]
+modulate = Color(0.698449, 0.635314, 0.844947, 1)
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="Teeth" type="Sprite2D" parent="." node_paths=PackedStringArray("spinning_object")]
+texture = ExtResource("1_e3vn2")
+script = ExtResource("2_ohpo4")
+spinning_object = NodePath(".")
+rpm = 60.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("3_xrbts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 40
+shape = SubResource("CircleShape2D_4sxej")
+debug_color = Color(0.997257, 0, 0.169914, 0.42)

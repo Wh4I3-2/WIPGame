@@ -1,0 +1,186 @@
+[gd_scene load_steps=22 format=3 uid="uid://dewdf6a3bp1b5"]
+
+[ext_resource type="Script" path="res://source/scripts/set_main_menu.gd" id="1_a7xvd"]
+[ext_resource type="FontFile" uid="uid://co5lovalni0l" path="res://assets/fonts/roboto/Roboto-Black.ttf" id="1_rp3om"]
+[ext_resource type="Shader" path="res://assets/shaders/space.gdshader" id="2_worvq"]
+[ext_resource type="Script" path="res://source/scripts/ui/deaths_label.gd" id="3_i01kj"]
+[ext_resource type="Texture2D" uid="uid://ci07yi52txe64" path="res://noise.tres" id="3_itrj6"]
+[ext_resource type="Theme" uid="uid://b0d136mxoiapm" path="res://assets/ui themes/main_theme.tres" id="3_uj1kl"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/scene_change_button.gd" id="4_7d225"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/exit_button.gd" id="5_pldfm"]
+[ext_resource type="AudioStream" uid="uid://2wdmiovguawo" path="res://assets/audio/sfx/ui_select.ogg" id="6_e4f1x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_npdbi"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_7pmhh"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gmed6"]
+gradient = SubResource("Gradient_7pmhh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpuaf"]
+shader = ExtResource("2_worvq")
+shader_parameter/speed_scale = 0.4
+shader_parameter/texture = SubResource("GradientTexture2D_gmed6")
+shader_parameter/noise = ExtResource("3_itrj6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_b50cy"]
+font = ExtResource("1_rp3om")
+font_size = 144
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ip10v"]
+font = ExtResource("1_rp3om")
+font_size = 96
+font_color = Color(0.584314, 0.623529, 0.721569, 1)
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ounfl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b625e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t137q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_khfin"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0kq4b"]
+
+[sub_resource type="Environment" id="Environment_gihjm"]
+background_mode = 3
+tonemap_exposure = 0.68
+glow_enabled = true
+glow_levels/2 = 3.38
+glow_intensity = 0.88
+glow_strength = 0.92
+glow_bloom = 0.22
+glow_hdr_threshold = 0.71
+glow_hdr_scale = 0.62
+adjustment_enabled = true
+adjustment_brightness = 1.24
+adjustment_contrast = 1.04
+
+[node name="EndOfDemo" type="CanvasLayer" node_paths=PackedStringArray("focus")]
+script = ExtResource("1_a7xvd")
+main_menu = true
+focus = NodePath("SubViewportContainer/SubViewport/Control/BoxContainer/VBoxContainer/Menu2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_npdbi")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(320, 180)
+size_2d_override = Vector2i(320, 180)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="TextureRect" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_mpuaf")
+offset_left = -3305.0
+offset_top = -2308.0
+offset_right = 5774.0
+offset_bottom = 3196.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1920, 1080)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/Control/BoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/Control/BoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "End of demo"
+label_settings = SubResource("LabelSettings_b50cy")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="SubViewportContainer/SubViewport/Control/BoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "You died x amount of times"
+label_settings = SubResource("LabelSettings_ip10v")
+horizontal_alignment = 1
+script = ExtResource("3_i01kj")
+typewrite_delay = 0.1
+typewrite_sound = ExtResource("6_e4f1x")
+
+[node name="HSeparator" type="HSeparator" parent="SubViewportContainer/SubViewport/Control/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_uj1kl")
+theme_override_constants/separation = 100
+
+[node name="Menu2" type="Button" parent="SubViewportContainer/SubViewport/Control/BoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Desktop")
+focus_previous = NodePath("../Desktop")
+theme = ExtResource("3_uj1kl")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ounfl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b625e")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t137q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_khfin")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0kq4b")
+text = "Exit To Menu"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_7d225")
+ui = true
+transition_on = 0
+transition_on_length = 1.0
+transition_off = 0
+transition_off_length = 0.5
+align = 1
+
+[node name="Desktop" type="Button" parent="SubViewportContainer/SubViewport/Control/BoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Menu2")
+focus_neighbor_bottom = NodePath("../Menu2")
+focus_next = NodePath("../Menu2")
+theme = ExtResource("3_uj1kl")
+theme_override_font_sizes/font_size = 64
+text = "Exit To Desktop"
+script = ExtResource("5_pldfm")
+align = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gihjm")

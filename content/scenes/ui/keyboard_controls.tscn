@@ -1,0 +1,495 @@
+[gd_scene load_steps=16 format=3 uid="uid://b7ma5p6te22uc"]
+
+[ext_resource type="Theme" uid="uid://b0d136mxoiapm" path="res://assets/ui themes/main_theme.tres" id="1_532b8"]
+[ext_resource type="FontFile" uid="uid://co5lovalni0l" path="res://assets/fonts/roboto/Roboto-Black.ttf" id="2_1a1in"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/ui_button.gd" id="3_k7ay0"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/remap_input_button.gd" id="4_njulb"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/remap_input.gd" id="5_uax0s"]
+[ext_resource type="PackedScene" uid="uid://byrrd3cyydqs8" path="res://content/scenes/ui/input_prompt.tscn" id="6_tt7i4"]
+[ext_resource type="Script" path="res://source/scripts/ui/buttons/reset_controls_button.gd" id="7_q7sei"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykvt3"]
+font = ExtResource("2_1a1in")
+font_size = 96
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ee3u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vaph"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jicu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6fkl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4d7c2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v7uj6"]
+font = ExtResource("2_1a1in")
+font_size = 48
+font_color = Color(0.584314, 0.623529, 0.721569, 1)
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dxjpv"]
+
+[node name="Options" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_532b8")
+theme_override_constants/margin_left = 512
+theme_override_constants/margin_right = 512
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Keyboard Controls"
+label_settings = SubResource("LabelSettings_ykvt3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="VBoxContainer/Back2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Reset/Keyboard/Button")
+focus_previous = NodePath("../../Reset/Keyboard/Button")
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Back"
+flat = true
+icon_alignment = 1
+script = ExtResource("3_k7ay0")
+align = 1
+
+[node name="Movement" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Movement"
+label_settings = SubResource("LabelSettings_v7uj6")
+vertical_alignment = 1
+
+[node name="Up" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Up"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Up/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Up/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Up"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Up"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "move_up"
+
+[node name="InputPrompt" parent="VBoxContainer/Up/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "move_up"
+device = 1
+
+[node name="Down" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Down"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Down/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Down/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Down"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Down"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "move_down"
+
+[node name="InputPrompt" parent="VBoxContainer/Down/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "move_down"
+device = 1
+
+[node name="Left" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Left"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Left/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Left/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Left"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Left"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "move_left"
+
+[node name="InputPrompt" parent="VBoxContainer/Left/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "move_left"
+device = 1
+
+[node name="Right" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Right"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Right/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Right/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Right"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Right"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "move_right"
+
+[node name="InputPrompt" parent="VBoxContainer/Right/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "move_right"
+device = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Jump" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Jump"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Jump/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Jump/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Jump"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Jump"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "jump"
+
+[node name="InputPrompt" parent="VBoxContainer/Jump/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "jump"
+device = 1
+
+[node name="Climb" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Climb"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Climb/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Climb/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Climb"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Climb"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "grab"
+
+[node name="InputPrompt" parent="VBoxContainer/Climb/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "grab"
+device = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_constants/separation = 32
+
+[node name="Window" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Window"
+label_settings = SubResource("LabelSettings_v7uj6")
+vertical_alignment = 1
+
+[node name="Fullscreen" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Fullscreen"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Fullscreen/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Fullscreen/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Fullscreen"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Fullscreen"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "fullscreen"
+
+[node name="InputPrompt" parent="VBoxContainer/Fullscreen/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "fullscreen"
+device = 1
+
+[node name="Pause" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Pause"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Pause/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Pause/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Pause"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Pause"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "pause"
+
+[node name="InputPrompt" parent="VBoxContainer/Pause/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "pause"
+device = 1
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_constants/separation = 32
+
+[node name="Window2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Extras"
+label_settings = SubResource("LabelSettings_v7uj6")
+vertical_alignment = 1
+
+[node name="Screenshot" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Screenshot"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Screenshot/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Screenshot/Keyboard" node_paths=PackedStringArray("input_prompt", "seperator")]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Screenshot"
+flat = true
+icon_alignment = 1
+script = ExtResource("4_njulb")
+input_prompt = NodePath("../../HBoxContainer")
+seperator = NodePath("../VSeparator")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Screenshot"]
+layout_mode = 2
+alignment = 2
+script = ExtResource("5_uax0s")
+action = "screenshot"
+
+[node name="InputPrompt" parent="VBoxContainer/Screenshot/HBoxContainer" instance=ExtResource("6_tt7i4")]
+layout_mode = 2
+action = "screenshot"
+device = 1
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+theme_override_constants/separation = 32
+
+[node name="Reset" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_532b8")
+
+[node name="Keyboard" type="HBoxContainer" parent="VBoxContainer/Reset"]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Reset/Keyboard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dxjpv")
+
+[node name="Button" type="Button" parent="VBoxContainer/Reset/Keyboard" node_paths=PackedStringArray("seperator")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../../Back2/Back")
+focus_next = NodePath("../../../Back2/Back")
+theme = ExtResource("1_532b8")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ee3u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4vaph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jicu2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r6fkl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4d7c2")
+text = "Reset Controls"
+flat = true
+icon_alignment = 1
+script = ExtResource("7_q7sei")
+seperator = NodePath("../VSeparator")
+align = 1

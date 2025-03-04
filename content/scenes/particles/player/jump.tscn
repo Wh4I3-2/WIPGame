@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://do3300auj8tip"]
+
+[ext_resource type="Script" path="res://source/scripts/particle_destroy_on_finish.gd" id="2_bwiiv"]
+
+[sub_resource type="Gradient" id="Gradient_fwxqo"]
+offsets = PackedFloat32Array(0, 0.994012)
+colors = PackedColorArray(1, 1, 1, 1, 0.7276, 0.714, 0.85, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kd1n1"]
+gradient = SubResource("Gradient_fwxqo")
+
+[sub_resource type="Gradient" id="Gradient_56lk6"]
+offsets = PackedFloat32Array(0.233533, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tdv8n"]
+gradient = SubResource("Gradient_56lk6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xfpfk"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 16.759
+initial_velocity_min = 123.94
+initial_velocity_max = 146.09
+gravity = Vector3(0, 600, 0)
+scale_min = 0.0
+scale_max = 2.0
+color = Color(0.768627, 0.768627, 0.768627, 1)
+color_ramp = SubResource("GradientTexture1D_tdv8n")
+color_initial_ramp = SubResource("GradientTexture1D_kd1n1")
+anim_offset_max = 1.0
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_pk2rd"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rff1o"]
+gradient = SubResource("Gradient_pk2rd")
+width = 1
+height = 1
+
+[node name="Jump" type="GPUParticles2D"]
+z_index = 2
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_xfpfk")
+texture = SubResource("GradientTexture2D_rff1o")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_bwiiv")

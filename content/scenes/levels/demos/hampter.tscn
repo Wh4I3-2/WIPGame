@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://du01fakwn3qjo"]
+
+[ext_resource type="Script" path="res://source/scripts/set_main_menu.gd" id="1_auhtm"]
+[ext_resource type="Shader" path="res://assets/shaders/space.gdshader" id="1_h5bdu"]
+[ext_resource type="PackedScene" uid="uid://bdbwwscukly3d" path="res://assets/models/hampter.gltf" id="1_x0g1m"]
+[ext_resource type="Script" path="res://source/scripts/hampter.gd" id="2_hfjoc"]
+[ext_resource type="Texture2D" uid="uid://ci07yi52txe64" path="res://noise.tres" id="2_j8buo"]
+[ext_resource type="Script" path="res://source/scripts/music_player.gd" id="5_r3m33"]
+[ext_resource type="AudioStream" uid="uid://c46vpta70m7gb" path="res://assets/audio/music/attack of the space kazoo bandits.ogg" id="7_lgss2"]
+
+[sub_resource type="Gradient" id="Gradient_7pmhh"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c0ohe"]
+gradient = SubResource("Gradient_7pmhh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8v4vf"]
+shader = ExtResource("1_h5bdu")
+shader_parameter/speed_scale = 0.4
+shader_parameter/texture = SubResource("GradientTexture2D_c0ohe")
+shader_parameter/noise = ExtResource("2_j8buo")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_auhtm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_8v4vf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/Control/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(180, 180)
+render_target_update_mode = 4
+
+[node name="blockbench_export" parent="CanvasLayer/Control/SubViewportContainer/SubViewport" node_paths=PackedStringArray("label", "music_player") instance=ExtResource("1_x0g1m")]
+script = ExtResource("2_hfjoc")
+label = NodePath("../../../../Speed")
+music_player = NodePath("../../../../AudioStreamPlayer")
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/Control/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.71622)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/Control/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.3267)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
+process_mode = 3
+bus = &"Music"
+script = ExtResource("5_r3m33")
+loop = ExtResource("7_lgss2")
+glitch_chance = 0.01
+glitch_setback_range = 0.2
+glitch_try_freq = 0.1
+glitch_amount_range = 16
+
+[node name="Speed" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Speed"
