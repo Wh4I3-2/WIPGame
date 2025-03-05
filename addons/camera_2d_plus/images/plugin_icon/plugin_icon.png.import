@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bt5v4tumrjmkh"
-path="res://.godot/imported/plugin_icon.png-1571e90440d09aa0ad3025008f0a9a41.ctex"
+path="res://.godot/imported/plugin_icon.png-4ad0103b0e2f2a9d9c11d5a5a4395b16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/camera_2d_plus/images/plugin_icon/plugin_icon.png"
-dest_files=["res://.godot/imported/plugin_icon.png-1571e90440d09aa0ad3025008f0a9a41.ctex"]
+source_file="res://Addons/camera_2d_plus/images/plugin_icon/plugin_icon.png"
+dest_files=["res://.godot/imported/plugin_icon.png-4ad0103b0e2f2a9d9c11d5a5a4395b16.ctex"]
 
 [params]
 

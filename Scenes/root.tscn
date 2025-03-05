@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://3pajddemttu8"]
+
+[ext_resource type="PackedScene" uid="uid://cbk0ngbtev3m1" path="res://Scenes/test.tscn" id="1_pbw4k"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p8ne2"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_r2vje"]
+offsets = PackedFloat32Array(0.693989, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.380392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rlx7w"]
+gradient = SubResource("Gradient_r2vje")
+width = 960
+height = 540
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Root" type="Node2D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+snap_2d_transforms_to_pixel = true
+use_hdr_2d = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(320, 180)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Test" parent="SubViewport" instance=ExtResource("1_pbw4k")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_p8ne2")
+
+[node name="Vignette" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_rlx7w")

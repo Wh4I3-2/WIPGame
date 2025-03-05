@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://byrj4q5pr6tni"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Player/player.gd" id="1_u6yfm"]
+[ext_resource type="PackedScene" uid="uid://bsgtv7janipf5" path="res://Scenes/Objects/Player/Gamemodes/ball.tscn" id="2_d2mqj"]
+
+[sub_resource type="Gradient" id="Gradient_ohggy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.314208, 0.581967)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.517647, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nirp1"]
+gradient = SubResource("Gradient_ohggy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("collision_shape", "default_gamemode")]
+collision_layer = 13
+collision_mask = 13
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_u6yfm")
+collision_shape = NodePath("CollisionShape2D")
+default_gamemode = NodePath("Ball")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Ball" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_d2mqj")]
+player = NodePath("..")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -8)
+color = Color(0.85098, 1, 1, 0.356863)
+energy = 1.2
+texture = SubResource("GradientTexture2D_nirp1")
+texture_scale = 0.9

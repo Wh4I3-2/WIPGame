@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ts8ci2yibd50"]
 
-[ext_resource type="Script" path="res://addons/camera_2d_plus/objects/camera_2d_plus/camera_2d_plus_script.gd" id="1_lentq"]
-[ext_resource type="Script" path="res://addons/camera_2d_plus/objects/test_scene/test_scene_script.gd" id="1_rdbk4"]
-[ext_resource type="Texture2D" uid="uid://bt5v4tumrjmkh" path="res://addons/camera_2d_plus/images/plugin_icon/plugin_icon.png" id="2_p21u5"]
+[ext_resource type="Script" path="res://Addons/camera_2d_plus/objects/camera_2d_plus/camera_2d_plus_script.gd" id="1_lentq"]
+[ext_resource type="Script" path="res://Addons/camera_2d_plus/objects/test_scene/test_scene_script.gd" id="1_rdbk4"]
+[ext_resource type="Texture2D" uid="uid://bt5v4tumrjmkh" path="res://Addons/camera_2d_plus/images/plugin_icon/plugin_icon.png" id="2_p21u5"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_rdbk4")

@@ -13,32 +13,22 @@ config_version=5
 config/name="Wh4I3's Incredible Platformer"
 config/version="demo-2"
 config/tags=PackedStringArray("big", "important")
-run/main_scene="res://content/scenes/menu.tscn"
+run/main_scene="res://Scenes/root.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://assets/textures/hampter_0.png"
 
 [autoload]
 
-Util="*res://source/singletons/utility.gd"
-SignalBus="*res://source/singletons/signal_bus.gd"
-SettingsManager="*res://source/singletons/settings_manager.gd"
-WindowManager="*res://source/singletons/window_manager.gd"
-CameraManager="*res://source/singletons/camera_manager.gd"
-SceneManager="*res://source/singletons/scene_manager.gd"
-SoundManager="*res://source/singletons/sound_manager.gd"
-CheckpointManager="*res://source/singletons/checkpoint_manager.gd"
-GameManager="*res://source/singletons/game_manager.gd"
-UIManager="*res://source/singletons/ui_manager.gd"
-InputHelper="*res://addons/input_helper/input_helper.gd"
+SignalBus="*res://Autoload/signal_bus.gd"
+WindowManager="*res://Autoload/window_manager.gd"
+CameraManager="*res://Autoload/camera_manager.gd"
+SoundManager="*res://Autoload/sound_manager.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/window_width_override=1280
-window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/per_pixel_transparency/allowed=true
@@ -151,4 +141,3 @@ textures/decals/filter=0
 textures/light_projectors/filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

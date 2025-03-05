@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsgtv7janipf5"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Player/Gamemodes/ball.gd" id="1_sqf6i"]
+[ext_resource type="Script" path="res://Components/State Machine/state_machine.gd" id="2_e1g6u"]
+[ext_resource type="Script" path="res://Components/State Machine/Player/ball.gd" id="3_unlb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nmjm"]
+size = Vector2(12, 12)
+
+[sub_resource type="Gradient" id="Gradient_elhhi"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.0186916, 0.58348, 0.659051, 0.82866, 0.896309)
+colors = PackedColorArray(1, 1, 1, 1, 0.674815, 0.674815, 0.674815, 1, 1, 1, 1, 1, 0.589096, 0.589096, 0.589096, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lwxbw"]
+gradient = SubResource("Gradient_elhhi")
+width = 12
+height = 12
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_4ab1e"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iknid"]
+gradient = SubResource("Gradient_4ab1e")
+width = 6
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_dka6g"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cp8fb"]
+gradient = SubResource("Gradient_dka6g")
+width = 1
+height = 1
+
+[node name="Ball" type="Node2D" node_paths=PackedStringArray("eyes", "mouth", "hat", "body", "flip_pivot", "pivot")]
+script = ExtResource("1_sqf6i")
+collision_shape = SubResource("RectangleShape2D_3nmjm")
+collision_offset = Vector2(0, -6)
+eyes = NodePath("Pivot/Flip/Face/Eyes")
+mouth = NodePath("Pivot/Flip/Face/Mouth")
+hat = NodePath("Pivot/Flip/Hat")
+body = NodePath("Pivot/Flip/Body")
+flip_pivot = NodePath("Pivot/Flip")
+pivot = NodePath("Pivot")
+gravity = 240.0
+gravity_accel = 10.0
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(1.16415e-09, -6)
+rotation = 0.00287912
+
+[node name="Flip" type="Node2D" parent="Pivot"]
+position = Vector2(0.0115165, 3.99998)
+
+[node name="Body" type="Sprite2D" parent="Pivot/Flip"]
+position = Vector2(0, -4)
+texture = SubResource("GradientTexture2D_lwxbw")
+
+[node name="Face" type="Node2D" parent="Pivot/Flip"]
+position = Vector2(-0.0143956, -4.99998)
+
+[node name="Mouth" type="Sprite2D" parent="Pivot/Flip/Face"]
+z_index = 5
+position = Vector2(-1.19209e-07, -2.70084e-08)
+texture = SubResource("GradientTexture2D_iknid")
+offset = Vector2(1, 0)
+
+[node name="Eyes" type="Node2D" parent="Pivot/Flip/Face"]
+
+[node name="Eye 1" type="Sprite2D" parent="Pivot/Flip/Face/Eyes"]
+z_index = 5
+position = Vector2(-0.0345488, 4.95911e-05)
+texture = SubResource("GradientTexture2D_cp8fb")
+offset = Vector2(6, -1)
+
+[node name="Eye 2" type="Sprite2D" parent="Pivot/Flip/Face/Eyes"]
+z_index = 5
+position = Vector2(-0.0345488, 4.95911e-05)
+texture = SubResource("GradientTexture2D_cp8fb")
+offset = Vector2(-5, -1)
+
+[node name="Hat" type="Sprite2D" parent="Pivot/Flip"]
+z_index = 10
+position = Vector2(0, -19)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state_owner", "default_state")]
+script = ExtResource("2_e1g6u")
+state_owner = NodePath("..")
+default_state = NodePath("BallState")
+
+[node name="BallState" type="Node" parent="StateMachine"]
+script = ExtResource("3_unlb2")
