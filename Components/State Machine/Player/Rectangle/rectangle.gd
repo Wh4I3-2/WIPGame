@@ -1,12 +1,11 @@
-class_name BallState
+class_name RectangleState
 extends State
 
-func process(state_owner: Node, _delta: float) -> State:
-	if state_owner.player.is_on_floor():
-		if Input.is_action_just_pressed("jump"):
-			state_owner.flipped = !state_owner.flipped
-		if Input.is_action_just_pressed("grab"):
-			state_owner.velocity.y = state_owner.jump_strength * state_owner.player.up_direction.y
+@export var grab_state: State
+
+func process(state_owner: Node, delta: float) -> State:
+	if Input.is_action_pressed("grab") and state_owner.can_grab():
+		return grab_state
 	return null
 
 func physics_process(state_owner: Node, delta: float) -> State:
@@ -18,8 +17,5 @@ func physics_process(state_owner: Node, delta: float) -> State:
 		state_owner.velocity.y = 0
 	return null
 
-func input(state_owner: Node, event: InputEvent) -> State: 
-	return null
-
-func selected(_state_owner: Node) -> void:
-	pass
+func selected(state_owner: Node) -> void:
+	state_owner.player.up_direction = Vector2(0, -1)

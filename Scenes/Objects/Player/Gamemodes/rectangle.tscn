@@ -1,7 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://df8bf2m825oub"]
+[gd_scene load_steps=12 format=3 uid="uid://df8bf2m825oub"]
 
 [ext_resource type="Script" path="res://Scenes/Objects/Player/Gamemodes/rectangle.gd" id="1_d6yvc"]
 [ext_resource type="Script" path="res://Components/State Machine/state_machine.gd" id="2_swdn5"]
+[ext_resource type="Script" path="res://Components/State Machine/Player/Rectangle/rectangle.gd" id="3_tkx0j"]
+[ext_resource type="Script" path="res://Components/State Machine/Player/Rectangle/rectangle_grab.gd" id="4_d5mfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4suy"]
+size = Vector2(10, 14)
 
 [sub_resource type="Gradient" id="Gradient_elhhi"]
 offsets = PackedFloat32Array(1)
@@ -32,6 +37,8 @@ height = 1
 
 [node name="Rectangle" type="Node2D" node_paths=PackedStringArray("eyes", "mouth", "hat", "body", "flip_pivot", "pivot")]
 script = ExtResource("1_d6yvc")
+collision_shape = SubResource("RectangleShape2D_w4suy")
+collision_offset = Vector2(0, -7)
 eyes = NodePath("Pivot/Flip/Face/Eyes")
 mouth = NodePath("Pivot/Flip/Face/Mouth")
 hat = NodePath("Pivot/Flip/Hat")
@@ -42,7 +49,6 @@ pivot = NodePath("Pivot")
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(-1.11022e-16, -1)
 rotation = 0.00287912
-scale = Vector2(1, 1)
 
 [node name="Flip" type="Node2D" parent="Pivot"]
 position = Vector2(-6.98489e-10, 2.01104e-12)
@@ -66,14 +72,12 @@ offset = Vector2(1, 0)
 [node name="Eye 1" type="Sprite2D" parent="Pivot/Flip/Face/Eyes"]
 z_index = 5
 position = Vector2(-0.0345488, 4.95911e-05)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_cp8fb")
 offset = Vector2(6, -1)
 
 [node name="Eye 2" type="Sprite2D" parent="Pivot/Flip/Face/Eyes"]
 z_index = 5
 position = Vector2(-0.0345488, 4.95911e-05)
-scale = Vector2(1, 1)
 texture = SubResource("GradientTexture2D_cp8fb")
 offset = Vector2(-5, -1)
 
@@ -81,6 +85,15 @@ offset = Vector2(-5, -1)
 z_index = 10
 position = Vector2(0, -19)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state_owner")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state_owner", "default_state")]
 script = ExtResource("2_swdn5")
 state_owner = NodePath("..")
+default_state = NodePath("RectangleState")
+
+[node name="RectangleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("grab_state")]
+script = ExtResource("3_tkx0j")
+grab_state = NodePath("../RectangleGrabState")
+
+[node name="RectangleGrabState" type="Node" parent="StateMachine" node_paths=PackedStringArray("state")]
+script = ExtResource("4_d5mfp")
+state = NodePath("../RectangleState")

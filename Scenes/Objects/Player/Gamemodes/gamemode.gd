@@ -1,5 +1,5 @@
 class_name GameMode
-extends Node
+extends Node2D
 
 @export var collision_shape: Shape2D
 @export var collision_offset: Vector2
