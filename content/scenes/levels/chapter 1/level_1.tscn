@@ -193,6 +193,7 @@ shader_parameter/alpha_offset = 0.01
 shader_parameter/_texture = ExtResource("26_x7xs3")
 
 [node name="Part1" type="Node2D"]
+position = Vector2(-1, 0)
 script = ExtResource("1_bmn8p")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -496,7 +497,6 @@ shape = SubResource("RectangleShape2D_3yxdr")
 debug_color = Color(0.854902, 0, 0.886275, 0.419608)
 
 [node name="Screen2" type="Node2D" parent="Screens"]
-visible = false
 
 [node name="CameraActivator" type="Area2D" parent="Screens/Screen2"]
 position = Vector2(320, -8)
