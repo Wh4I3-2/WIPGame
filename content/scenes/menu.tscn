@@ -757,6 +757,12 @@ mouse_filter = 1
 [node name="Color" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="5"]
 mouse_filter = 1
 
+[node name="HSeparator2" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="7"]
+mouse_filter = 1
+
+[node name="StaminaColor" parent="SubViewportContainer/SubViewport/Cosmetics/SmoothScrollContainer/CenterContainer/Cosmetics/VBoxContainer" index="8"]
+mouse_filter = 1
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 script = ExtResource("3_e6nx3")

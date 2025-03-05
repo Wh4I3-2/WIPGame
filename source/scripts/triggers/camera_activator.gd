@@ -1,7 +1,7 @@
 extends Area2D
 
 @export_category("Camera Activator")
-@export var room_id : int
+@export var room_id : String
 
 @export_subgroup("Limit")
 @export var limit_top    : float
